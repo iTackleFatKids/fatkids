@@ -1,22 +1,140 @@
-The MIT License (MIT)
+import random
 
-Copyright (c) 2015 Dixie Normous
+game=0#gamechoice
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+print "\n \n \nWelcome to the Calypso! We are a brand new casino and currently have three selections to choose from.\n"
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+#while loop for games
+while game==0 or game==1 or game==2 or game==3:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+    print "\t1)BlackJack\n\t2)Roulette\n\t3)Slots\n"
+    game=int(raw_input("To select where you would like to go, please enter the corresponding game\nnumber from the list above:\t"))
+    
+    if game==1:#blackjack
+    
+    
+        print "\n \n \n \nWelcome to my blackjack table! I am the dealer \nand wish you luck in besting my cards. Pro-tip: Aces can only be used as 11."
+        
+        cards={"two":2,"three":3,"four":4, "five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,"jack":10,"queen":10,"king":10,"ace":11}
+        
+        deck=["two","three","four","five","six","seven","eight","nine","ten","jack","queen","king","ace"]
+        
+        name=raw_input("If you would please enter your name:\t")
+        
+        gameEnderBlackJack="y"
+        playerValue=0
+        
+        
+        while gameEnderBlackJack!="n":
+            bet=int(raw_input("What shall the wager be?\t$"))
+            playerHandValue=0
+            playerHand=""
+            tempCard=deck[random.randint(0,12)]
+            playerHandValue+=cards[tempCard]
+            playerHand+=tempCard
+            playerHand+=" "
+            tempCard=deck[random.randint(0,12)]
+            playerHandValue+=cards[tempCard]
+            playerHand+=tempCard
+            playerHand+=" "
+            dealerHand=""
+            hiddenDealerCard=""
+            dealerHandValue=0
+            showingDealerHand=""
+            tempCard=deck[random.randint(0,12)]
+            dealerHand+=tempCard
+            hiddenDealerCard=tempCard
+            dealerHand+=" "
+            dealerHandValue+=cards[tempCard]
+            tempCard=deck[random.randint(0,12)]
+            dealerHand+=tempCard
+            dealerHand+=" "
+            dealerHandValue+=cards[tempCard]
+            showingDealerHand+=tempCard
+            showingDealerHand+=" "
+            print name+"'s ","Hand:\t",playerHand, "\t",playerHandValue
+            print "Dealer's Hand:\t",showingDealerHand,"\t",dealerHandValue
+            
+            hitStayVariable=raw_input("h for hit or s for stay:\t")
+            print "\n"
+            
+            while hitStayVariable.lower()!="s":
+                tempCard=deck[random.randint(0,12)]
+                playerHand+=tempCard
+                playerHandValue+=cards[tempCard]
+                playerHand+=" "
+                print name+"'s ","Hand:\t",playerHand, "\t",playerHandValue
+            
+                if playerHandValue>21:
+                    print "\tYou busted out"
+                    playerValue-=bet
+                    print name,"is at $" , playerValue
+            
+                else:
+                    hitStayVariable=raw_input("h for hit or s for stay:\t")
+                    print "\n"
+                
+            if hitStayVariable.lower()=="s":
+                showingDealerHand+=hiddenDealerCard
+                showingDealerHand+=" "
+                
+                while dealerHandValue<17:
+                    tempCard=deck[random.randint(0,12)]
+                    dealerHand+=" "
+                    dealerHand+=tempCard
+                    dealerHandValue+=cards[tempCard]
+                    showingDealerHand+=tempCard
+                    showingDealerHand+=" "
+                
+                print name+"'s ","Hand:\t",playerHand, "\t",playerHandValue
+                print "Dealer's Hand:\t",showingDealerHand,"\t",dealerHandValue
+                
+                if dealerHandValue>21:
+                    print "Dealer busted out at ",dealerHandValue
+                    print name,"won that round"
+                    playerValue+=bet
+                    print name,"is at $" , playerValue
+                    
+                elif playerHandValue>dealerHandValue and playerHandValue<22:
+                    print name,"won that round"
+                    playerValue+=bet
+                    print name,"is at $" , playerValue
+                    
+                if dealerHandValue>playerHandValue and dealerHandValue<22:
+                    print "Dealer won with", dealerHandValue
+                    playerValue-=bet
+                    print name,"is at $" , playerValue
+                if dealerHandValue==playerHandValue:
+                    print "Tie with dealer, bets have been returned"
 
+            gameEnderBlackJack=raw_input("Another hand? y or n\t")
+            if gameEnderBlackJack == "n":
+                game = 0
+                
+    if game==2:#Roulette
+        gameEnderRoulette="y"
+        while gameEnderRoulette!="n":
+            print "It works"
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            gameEnderRoulette=raw_input("Another spin? y to stay or n to leave\t:")
+            if gameEnderRoulette=="n":
+                game=0
+    if game==3:#Slots
+        gameEnderSlots="y"
+        while gameEnderSlots!="n":
+            print "Slots works"
+            gameEnderSlots=raw_input("Another spin? y to stay or n to leave\t:")
+            if gameEnderSlots== "n":
+                game
+        
