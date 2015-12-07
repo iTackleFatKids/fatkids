@@ -137,4 +137,97 @@ while game==0 or game==1 or game==2 or game==3:
             gameEnderSlots=raw_input("Another spin? y to stay or n to leave\t:")
             if gameEnderSlots== "n":
                 game
+                
+                
+                
+                
+                import random
+def Reels():
+   # [0]Winning Value, [1]Fruit, [2]Fruit, [3]Fruit
+    Ret_Val = [0," "," "," "]
+   # Spin those reels !
+    Reel_Spin = random.randrange(1,4,1),random.randrange(1,4,1),random.randrange(1,4,1)
+# Reel 1
+    if Reel_Spin[0] == 1:
+	    Ret_Val[0] += 1
+	    Ret_Val[1] = "Cherries"
+    if Reel_Spin[0] == 2:
+	    Ret_Val[0] += 5
+	    Ret_Val[1] = "BAR"
+    if Reel_Spin[0] == 3:
+	    Ret_Val[0] += 20
+	    Ret_Val[1] = "$$$"
+# Reel 2
+    if Reel_Spin[1] == 1:
+	    Ret_Val[0] += 1
+	    Ret_Val[2] = "777"
+    if Reel_Spin[1] == 2:
+	    Ret_Val[0] += 5
+	    Ret_Val[2] = "BAR"
+    if Reel_Spin[1] == 3:
+	    Ret_Val[0] += 20
+	    Ret_Val[2] = "$$$"
+# Reel 3
+    if Reel_Spin[2] == 1:
+	    Ret_Val[0] += 1
+	    Ret_Val[3] = "Cherries"
+    if Reel_Spin[2] == 2:
+	    Ret_Val[0] += 5
+	    Ret_Val[3] = "BAR"
+    if Reel_Spin[2] == 3:
+	    Ret_Val[0] += 20
+	    Ret_Val[3] = "$$$"
+    return Ret_Val
+# Starting Values
+Player_Money = 1000
+Jack_Pot = 100
+Run = True
+while Run == True:
+    Bet = 0
+    # Reset if player goes broke
+    if Player_Money < 1:
+	    input("You have no more money. Here is $ 1000 \nPress Enter \n")
+	    Player_Money = 1000
+	    Jack_Pot = 100
+    # User input
+    Bet_Line = input(" Place Your Bet ! \n Jackpot $ " + str(Jack_Pot) + "\n Money $ " + str(Player_Money) + "\n Q = quit \n")
+    if Bet_Line == "q" or Bet_Line == "Q":
+	    Run = False
+	    break
+    try:
+	    Bet = int(Bet_Line)
+    except:
+	    print("Error: '" + Bet_Line + "' is not a number !")
+	    pass
+    # Not enough money
+    if Bet > Player_Money:
+	    print("Sory, you only have $",Player_Money, "\n")
+    # Lets play !
+    elif Bet <= Player_Money and Bet > 0:
+	    Jack_Pot += (int(Bet*.15))
+	    Player_Money -= Bet
+	    Is_Winner = Reels()
+	    I_W = Is_Winner[0]
+	    Fruits = Is_Winner[1] + " - " + Is_Winner[2] + " - " + Is_Winner[3]
+	    # Match 3 - 1 in 9 chance
+	    if I_W == 3 or I_W == 15 or I_W == 60:
+		    print(Fruits + "\n" + "You Won $ " + str(Bet*4) + " !!! \n")
+		    Player_Money += (Bet*4)
+		    # Jackpot 1 in 450 chance of winnning
+		    JP1 = random.randrange(1,51,1)
+		    JP2 = random.randrange(1,51,1)
+		    if  JP1 == JP2:
+			    print ("You Won The Jackpot !!!\nHere is your $ " + str(Jack_Pot) + " prize! \n")
+			    Jack_Pot = 100
+		    elif JP1 != JP2:
+			    print ("You did not win the Jackpot this time. \nPlease try again ! \n")
+	    # Match 2 - 1 in 4.5 chance
+	    elif I_W == 7 or I_W == 22 or I_W == 11 or I_W == 30 or I_W == 41 or I_W == 45:
+		    print(Fruits + "\n" + "You Won $ " + str(int(Bet*.5)) + " !!! \n")
+		    Player_Money += (int(Bet*.5))
+	    # No win
+	    else:
+		    print(Fruits + "\nPlease try again. \n")
+#The End
+print("- Program Terminated -")
         
