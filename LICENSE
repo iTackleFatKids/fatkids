@@ -1,16 +1,17 @@
 import random
 
-game=0#gamechoice
+game=0
+#gamechoice
 name=raw_input("If you would please enter your name:\t")
 print "\n \n \nWelcome to the Calypso! We are a brand new casino and currently have three selections to choose from.\n"
 
 #while loop for games
+playerValue=int(raw_input("How much are we spending on chips tonight?\t$"))
 while game==0 or game==1 or game==2 or game==3:
-	playerValue=int(raw_input("How much are we spending on chips tonight?\t$"))
 	print "\t1)BlackJack\n\t2)Roulette\n\t3)Slots\n"
-    game=int(raw_input("To select where you would like to go, please enter the corresponding game\nnumber from the list above:\t"))
+   	game=int(raw_input("To select where you would like to go, please enter the corresponding game\nnumber from the list above:\t"))
     
-    if game==1:#blackjack
+   	if game==1:#blackjack
     
     
         print "\n \n \n \nWelcome to my blackjack table! I am the dealer \nand wish you luck in besting my cards. Pro-tip: Aces can only be used as 11."
@@ -247,7 +248,7 @@ while game==0 or game==1 or game==2 or game==3:
         		playerValue+=playerBet*12
         		print "\nWINNER!!!\n"
 	        	print "YOU HAVE BEEN AWARDED $",playerBet
-	        	print name,"\t$",playerValue"
+	        	print name,"\t$",playerValue
         	if tempSlot==743:
         		playerValue+=playerBet*75
         		#running the bases
@@ -255,12 +256,15 @@ while game==0 or game==1 or game==2 or game==3:
 	        	print "YOU HAVE BEEN AWARDED $",playerBet
 	        	print name,"\t$",playerValue"
 	        if tempSlot!=300 and tempSlot!=24 and tempSlot!=12 and tempSlot!=1665 and tempSlot!=264 and tempSlot!=3 and tempSlot!=30 and tempSlot!=743:
-	        	playerValue-+playerBet
+	        	playerValue-=playerBet
 	        	print "YOU LOSE"
+	        	print "-$",playerBet
+	        	print name, "\t$",playerValue
 	        	
 		gameEnderSlots=raw_input("Another spin? y or n\t:")
 		if gameEnderSlots=="n":
 			game=0
+			
         	
         
         
