@@ -1,13 +1,13 @@
 import random
 
 game=0#gamechoice
-
+name=raw_input("If you would please enter your name:\t")
 print "\n \n \nWelcome to the Calypso! We are a brand new casino and currently have three selections to choose from.\n"
 
 #while loop for games
 while game==0 or game==1 or game==2 or game==3:
-
-    print "\t1)BlackJack\n\t2)Roulette\n\t3)Slots\n"
+	playerValue=int(raw_input("How much are we spending on chips tonight?\t$"))
+	print "\t1)BlackJack\n\t2)Roulette\n\t3)Slots\n"
     game=int(raw_input("To select where you would like to go, please enter the corresponding game\nnumber from the list above:\t"))
     
     if game==1:#blackjack
@@ -19,10 +19,10 @@ while game==0 or game==1 or game==2 or game==3:
         
         deck=["two","three","four","five","six","seven","eight","nine","ten","jack","queen","king","ace"]
         
-        name=raw_input("If you would please enter your name:\t")
+      
         
         gameEnderBlackJack="y"
-        playerValue=0
+        
         
         
         while gameEnderBlackJack!="n":
@@ -113,13 +113,70 @@ while game==0 or game==1 or game==2 or game==3:
                 
     if game==2:#Roulette
         gameEnderRoulette="y"
+        print "Welcome to the game of European Roulette!" #no double zero
         while gameEnderRoulette!="n":
-            print "It works"
+        	colorBetMade=0
+        	oddEvenBetMade=0
+        	groupingBetMade=0
+        	individualBetMade=0
+            print "You currently have $", playerValue
+            theBigNumber=random.randint(0,36)
+            if theBigNumber==0:
+            	color="green"
+            	colorNum=0
+            if theBigNumber==1 or theBigNumber==3 or theBigNumber==5 or theBigNumber==7 or theBigNumber==9 or theBigNumber==12 or theBigNumber==14 or theBigNumber==16 or theBigNumber==18 or theBigNumber==19 or theBigNumber==21 or theBigNumber==23 or theBigNumber==25 or theBigNumber==27 or theBigNumber==30 or theBigNumber==32 or theBigNumber==34 or theBigNumber==36:
+            	color="red"
+            	colorNum=1
+            	
+            if theBigNumber==2 or theBigNumber==4 or theBigNumber==6 or theBigNumber==8 or theBigNumber==10 or theBigNumber==11 or theBigNumber==13 or theBigNumber==15 or theBigNumber==17 or theBigNumber==20 or theBigNumber==22 or theBigNumber==24 or theBigNumber==26 or theBigNumber==28 or theBigNumber==29 or theBigNumber==31 or theBigNumber==33 or theBigNumber==35:
+            	color="black"
+            	colorNum=2
+            	
+            if theBigNumber%2==0:
+            	evenOrOdd="even"
+            	
+            if theBigNumber%2>0:
+            	evenOrOdd="odd"
+            	
             
-            
-            
-            
-            
+            	
+            reds=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]
+            print "Reds are ",reds
+            blacks=[2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35]
+            print "Black are ",blacks
+            greens=[0]
+            print "Greens are ",greens
+            odds=[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35]
+            print "Odds are ",odds
+            evens=[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36]
+            #00 and 0 counted as not even nor odd
+            print "Evens are ",evens
+            anotherRoul="y"
+            userBets=[]
+            while anotherRoul=="y":
+            	betAmount=0
+            	betType=0
+            	betAmount=int(raw_input("Please set this round's bet value:\t$"))
+            	betType=int(raw_input("\t1)Red, Black, or Green\n\t2)Even or Odd\n\t3)Individual Number 0 to 36\n\t4)1 to 12 or 13 to 24 or 25 to 36
+            	if betType==1:
+            		colorBetMade=1
+            		rbg=int(raw_input("\n\tEnter the number of the color you would like to bet for\n\t\t1)Red\n\t\t2)Black\n\t\t3)Green\n\t:"
+            		
+            		if rgb==colorNum:
+            			print "Winner with color! Reward is $",betAmount*2
+            			playerValue+=betAmount*2
+            			print name, "$", playerValue
+            		else:
+            			print "No reward for color"
+            			playerValue-=betAmount
+            			print "-$",betAmount
+            			print name, "$", playerValue
+            			
+            			
+            	print "Current table:",userBets
+            	anotherRoul=raw_input("Another bet? y or n:\t")
+            	
+            	
             
             
             
@@ -131,103 +188,81 @@ while game==0 or game==1 or game==2 or game==3:
             if gameEnderRoulette=="n":
                 game=0
     if game==3:#Slots
-        gameEnderSlots="y"
-        while gameEnderSlots!="n":
-            print "Slots works"
-            gameEnderSlots=raw_input("Another spin? y to stay or n to leave\t:")
-            if gameEnderSlots== "n":
-                game
-                
-                
-                
-                
-                import random
-def Reels():
-   # [0]Winning Value, [1]Fruit, [2]Fruit, [3]Fruit
-    Ret_Val = [0," "," "," "]
-   # Spin those reels !
-    Reel_Spin = random.randrange(1,4,1),random.randrange(1,4,1),random.randrange(1,4,1)
-# Reel 1
-    if Reel_Spin[0] == 1:
-	    Ret_Val[0] += 1
-	    Ret_Val[1] = "Cherries"
-    if Reel_Spin[0] == 2:
-	    Ret_Val[0] += 5
-	    Ret_Val[1] = "BAR"
-    if Reel_Spin[0] == 3:
-	    Ret_Val[0] += 20
-	    Ret_Val[1] = "$$$"
-# Reel 2
-    if Reel_Spin[1] == 1:
-	    Ret_Val[0] += 1
-	    Ret_Val[2] = "777"
-    if Reel_Spin[1] == 2:
-	    Ret_Val[0] += 5
-	    Ret_Val[2] = "BAR"
-    if Reel_Spin[1] == 3:
-	    Ret_Val[0] += 20
-	    Ret_Val[2] = "$$$"
-# Reel 3
-    if Reel_Spin[2] == 1:
-	    Ret_Val[0] += 1
-	    Ret_Val[3] = "Cherries"
-    if Reel_Spin[2] == 2:
-	    Ret_Val[0] += 5
-	    Ret_Val[3] = "BAR"
-    if Reel_Spin[2] == 3:
-	    Ret_Val[0] += 20
-	    Ret_Val[3] = "$$$"
-    return Ret_Val
-# Starting Values
-Player_Money = 1000
-Jack_Pot = 100
-Run = True
-while Run == True:
-    Bet = 0
-    # Reset if player goes broke
-    if Player_Money < 1:
-	    input("You have no more money. Here is $ 1000 \nPress Enter \n")
-	    Player_Money = 1000
-	    Jack_Pot = 100
-    # User input
-    Bet_Line = input(" Place Your Bet ! \n Jackpot $ " + str(Jack_Pot) + "\n Money $ " + str(Player_Money) + "\n Q = quit \n")
-    if Bet_Line == "q" or Bet_Line == "Q":
-	    Run = False
-	    break
-    try:
-	    Bet = int(Bet_Line)
-    except:
-	    print("Error: '" + Bet_Line + "' is not a number !")
-	    pass
-    # Not enough money
-    if Bet > Player_Money:
-	    print("Sory, you only have $",Player_Money, "\n")
-    # Lets play !
-    elif Bet <= Player_Money and Bet > 0:
-	    Jack_Pot += (int(Bet*.15))
-	    Player_Money -= Bet
-	    Is_Winner = Reels()
-	    I_W = Is_Winner[0]
-	    Fruits = Is_Winner[1] + " - " + Is_Winner[2] + " - " + Is_Winner[3]
-	    # Match 3 - 1 in 9 chance
-	    if I_W == 3 or I_W == 15 or I_W == 60:
-		    print(Fruits + "\n" + "You Won $ " + str(Bet*4) + " !!! \n")
-		    Player_Money += (Bet*4)
-		    # Jackpot 1 in 450 chance of winnning
-		    JP1 = random.randrange(1,51,1)
-		    JP2 = random.randrange(1,51,1)
-		    if  JP1 == JP2:
-			    print ("You Won The Jackpot !!!\nHere is your $ " + str(Jack_Pot) + " prize! \n")
-			    Jack_Pot = 100
-		    elif JP1 != JP2:
-			    print ("You did not win the Jackpot this time. \nPlease try again ! \n")
-	    # Match 2 - 1 in 4.5 chance
-	    elif I_W == 7 or I_W == 22 or I_W == 11 or I_W == 30 or I_W == 41 or I_W == 45:
-		    print(Fruits + "\n" + "You Won $ " + str(int(Bet*.5)) + " !!! \n")
-		    Player_Money += (int(Bet*.5))
-	    # No win
-	    else:
-		    print(Fruits + "\nPlease try again. \n")
-#The End
-print("- Program Terminated -")
+    	print"Welcome to the Calypo's slot machine! Some days it might treat you with a tenderness, and some days with a nasty bitterness!"
+    	while gameEnderSlots!="n":
+	    	playerValue-=5
+	    	tempSlot=0
+	    	gameEnderSlots="y"
+	    	
+	    	playerBet=0
+	    	playerBet=int(raw_input("What shall you wager?\t$"))
+	        firstWheel="one"
+	        secondWheel="two"
+	        thirdWheel="three"
+	        firstBar=random.randint(0,6)
+	        secondBar=random.randint(0,6)
+	        thirdBar=random.randint(0,6)
+	        items=["BAR","7","DIAMOND","$$$","CHERRIES","LEMON","TROPHY"]
+	        itemsValue={"BAR":100, "7":8, "DIAMOND":4 , "$$$":555 , "CHERRIES":88, "LEMON":1, "TROPHY":10}
+	        
+	        firstWheel=items[firstBar]
+	        tempSlot+=itemsValue[items[firstBar]]
+	        secondWheel=items[secondBar]
+	        tempSlot+=itemsValue[items[secondBar]]
+	        thirdWheel=item[thirdBar]
+	        tempSlot+=itemsValue[items[ThirdBar]]
+	        
+	        if tempSlot==300:
+	        	playerValue+=playerBet*50
+	        	print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+	        if tempSlot==24:
+	        	playerValue+=playerBet*6
+	        	print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+	        if tempSlot==12:
+	        	playerValue+=playerBet*6
+	        	print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+	        if tempSlot==1665:
+	        	playerValue+=playerBet*100
+	        	print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+	        if tempSlot==264:
+	        	playerValue+=playerBet*25
+	        	print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+	        	
+	        if tempSlot==3:
+	        	playerValue+=playerBet*6
+	        	print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+	        if tempSlot==30:
+        		playerValue+=playerBet*12
+        		print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+        	if tempSlot==743:
+        		playerValue+=playerBet*75
+        		#running the bases
+        		print "\nWINNER!!!\n"
+	        	print "YOU HAVE BEEN AWARDED $",playerBet
+	        	print name,"\t$",playerValue"
+	        if tempSlot!=300 and tempSlot!=24 and tempSlot!=12 and tempSlot!=1665 and tempSlot!=264 and tempSlot!=3 and tempSlot!=30 and tempSlot!=743:
+	        	playerValue-+playerBet
+	        	print "YOU LOSE"
+	        	
+		gameEnderSlots=raw_input("Another spin? y or n\t:")
+		if gameEnderSlots=="n":
+			game=0
+        	
+        
+        
+        
         
